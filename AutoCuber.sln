@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCuber", "AutoCuber\AutoCuber.csproj", "{5E887A81-4D43-4953-B3CA-4DFCB838DADB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2AF4BE9-7EEE-4920-BEEA-DC828406DF49}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E887A81-4D43-4953-B3CA-4DFCB838DADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E887A81-4D43-4953-B3CA-4DFCB838DADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E887A81-4D43-4953-B3CA-4DFCB838DADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E887A81-4D43-4953-B3CA-4DFCB838DADB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8CC7F10-B6C6-4DC3-99A6-3206E9E8FD6F}
+	EndGlobalSection
+EndGlobal
