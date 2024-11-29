@@ -1,0 +1,13 @@
+{
+  "FlameScoreValues": [
+    {
+      "Type": "Strength",
+      "Value": 2
+    },
+    {
+      "Type": "Luck",
+      "Value": 1
+    }
+  ],
+  "RequestedFlameScore": 20
+}

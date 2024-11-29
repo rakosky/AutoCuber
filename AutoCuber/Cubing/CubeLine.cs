@@ -1,16 +1,16 @@
-﻿namespace AutoCuber
+﻿namespace AutoCuber.Cubing
 {
     public class CubeLine
     {
-        public string Type { get; set; } = CubeLine.Unknown;
+        public string Type { get; set; } = Unknown;
         public int Value { get; set; } = 0;
         public CubeLine()
         {
-            
+
         }
         public CubeLine(string rawText)
         {
-            if(!rawText.Contains("%"))
+            if (!rawText.Contains("%"))
                 return;
 
             var rawsplit = rawText.Split('+');
