@@ -10,7 +10,7 @@
         }
         public CubeLine(string rawText)
         {
-            if (!rawText.Contains("%"))
+            if (!rawText.Contains("%") && !rawText.Contains("boss", StringComparison.CurrentCultureIgnoreCase))
                 return;
 
             var rawsplit = rawText.Split('+');
@@ -18,7 +18,6 @@
                 return;
 
             string type = rawsplit[0];
-            string value = rawsplit[1];
 
             foreach (var t in AllTypes)
             {
@@ -32,7 +31,11 @@
             if (Type is null)
                 return;
 
-            Value = int.Parse(value.Replace("%", string.Empty));
+            string value = string.Concat(rawsplit[1]
+                .Where(char.IsDigit));
+
+
+            Value = int.Parse(value);
         }
 
         public override string? ToString()
@@ -48,7 +51,7 @@
         public static string LUK = new string("LUK");
         public static string DEX = new string("DEX");
         public static string INT = new string("INT");
-        public static string IED = new string("lgnore Monster");
+        public static string IED = new string("Ignore Monster");
         public static string BossDmg = new string("Boss Monster");
         public static string Damage = new string("Damage");
         public static string Drop = new string("Drop");

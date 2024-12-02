@@ -26,7 +26,7 @@ namespace AutoCuber.Cubing
                 ?? throw new Exception("Error loading required image");
             var postClickDelay = 100;
             var postRerollDelay = 1400;
-            var imageSearchTimeout = 10000;
+            var imageSearchTimeout = 2500;
 
             var procs = Process.GetProcesses();
             var procHandle = procs.FirstOrDefault(p => p.ProcessName.ToLower().Contains("maplestory"))?.MainWindowHandle
@@ -37,8 +37,8 @@ namespace AutoCuber.Cubing
             var combo1 = new List<CubeLine> {
                 new CubeLine()
                 {
-                    Type = CubeLine.AllStats,
-                    Value = 18
+                    Type = CubeLine.LUK,
+                    Value = 27
                 }
             };
             desiredCombos.Add(combo1);
@@ -62,7 +62,7 @@ namespace AutoCuber.Cubing
                     Value = 40
                 },
             };
-            desiredCombos.Add(combo3);
+            //desiredCombos.Add(combo3);
 
             var combo4 = new List<CubeLine> {
                 new CubeLine()
@@ -84,7 +84,7 @@ namespace AutoCuber.Cubing
                 new CubeLine()
                 {
                     Type = CubeLine.BossDmg,
-                    Value = 30
+                    Value = 3
                 },
                 new CubeLine()
                 {
@@ -106,7 +106,7 @@ namespace AutoCuber.Cubing
                 new CubeLine()
                 {
                     Type = CubeLine.BossDmg,
-                    Value = 60
+                    Value = 6
                 },
                 new CubeLine()
                 {
@@ -127,7 +127,25 @@ namespace AutoCuber.Cubing
                     Value = 18
                 },
             };
-            desiredCombos.Add(combo9);
+            desiredCombos.Add(combo9);  
+            var combo10 = new List<CubeLine> {
+                new CubeLine()
+                {
+                    Type = CubeLine.IED,
+                    Value = 30
+                },              
+                new CubeLine()
+                {
+                    Type = CubeLine.BossDmg,
+                    Value = 3
+                },
+                new CubeLine()
+                {
+                    Type = CubeLine.ATT,
+                    Value = 9
+                },
+            };
+            desiredCombos.Add(combo10);
 
             bool hit = false;
 
@@ -164,15 +182,15 @@ namespace AutoCuber.Cubing
                 var resultsBounds = await ImageHelpers.FindOneImageCoordsInProcAsync(procHandle, [afterImg, resultImg], .1, imageSearchTimeout)
                     ?? throw new Exception("Couldn't find results");
 
-                var resultImage = ScreenCapture.CaptureWindow(procHandle, new Rectangle(new Point(resultsBounds.X + 4, resultsBounds.Y + 32), new Size(160, 42)));
-                resultImage.Save($"{Guid.NewGuid}_result");
+                var resultImage = ScreenCapture.CaptureWindow(procHandle, new Rectangle(new Point(resultsBounds.X + 2, resultsBounds.Y + 32), new Size(160, 42)));
                 int partHeight = resultImage.Height / 3;
                 // split resultImage into 3 lines
                 var slicedImages = Enumerable.Range(0, 3).Select((idx) =>
                     resultImage.Clone(new Rectangle(0, idx * partHeight, resultImage.Width, partHeight), resultImage.PixelFormat)).ToArray();
 
+                resultImage.Save($"results/{Guid.NewGuid()}_result.png");
                 foreach (var b in slicedImages)
-                    b.Save($"{Guid.NewGuid}_line");
+                    b.Save($"results/{Guid.NewGuid()}_line.png");
 
                 var results = slicedImages.Select(b => TesseractHelper.ReadBitmap(b)).ToList();
                 File.AppendAllLines("cuberesults.txt", results);
@@ -200,13 +218,17 @@ namespace AutoCuber.Cubing
                         {
                             sumsDictionary[key] += allStatSum;
                         }
+                        else
+                        {
+                            sumsDictionary.Add(key, allStatSum);
+                        }
                     }
                 }
 
                 // check for a hit
-                hit = true;
                 foreach (var combo in desiredCombos)
                 {
+                    hit = true;
                     foreach (var option in combo)
                     {
                         if (!sumsDictionary.TryGetValue(option.Type, out var relevantSumValue) || relevantSumValue < option.Value)
