@@ -82,10 +82,10 @@ namespace AutoCuber.Flaming
 
                 var resultImages = resultLineBounds.Select(r => ScreenCapture.CaptureWindow(procHandle, r));
 
-                foreach (var img in resultImages)
-                {
-                    img.Save($"results/{Guid.NewGuid()}_result.png");
-                }
+                //foreach (var img in resultImages)
+                //{
+                //    img.Save($"results/{Guid.NewGuid()}_result.png");
+                //}
 
                 var stringResults = resultImages.Select(TesseractHelper.ReadBitmap).ToList();
 
