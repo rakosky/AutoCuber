@@ -167,6 +167,7 @@ namespace AutoCuber.Cubing
                         else
                             throw new Exception("Couldn't find ok button");
                     }
+
                     await Task.Delay(postClickDelay);
                     InputHub.SendKey(ScanCodeShort.RETURN);
                 }
@@ -188,9 +189,9 @@ namespace AutoCuber.Cubing
                 var slicedImages = Enumerable.Range(0, 3).Select((idx) =>
                     resultImage.Clone(new Rectangle(0, idx * partHeight, resultImage.Width, partHeight), resultImage.PixelFormat)).ToArray();
 
-                resultImage.Save($"results/{Guid.NewGuid()}_result.png");
-                foreach (var b in slicedImages)
-                    b.Save($"results/{Guid.NewGuid()}_line.png");
+                //resultImage.Save($"results/{Guid.NewGuid()}_result.png");
+                //foreach (var b in slicedImages)
+                //    b.Save($"results/{Guid.NewGuid()}_line.png");
 
                 var results = slicedImages.Select(b => TesseractHelper.ReadBitmap(b)).ToList();
                 File.AppendAllLines("cuberesults.txt", results);

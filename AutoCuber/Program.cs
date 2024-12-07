@@ -10,8 +10,8 @@ namespace AutoCuber
             var autoCuber = new Cuber();
             var autoFlamer = new Flamer();
 
-            await autoCuber.Run();
-            //await autoFlamer.Run();
+            //await autoCuber.Run();
+            await autoFlamer.Run();
         }
     }
 }
